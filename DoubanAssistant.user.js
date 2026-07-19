@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         豆瓣助手
-// @version      1.2.3
+// @version      1.2.4
 // @namespace    airbash/DoubanAssistant
 // @homepageURL  https://github.com/AirBashX/UserScript
 // @author       airbash
@@ -30,7 +30,7 @@
 	// "use strict";
 	const url = location.href;
 	const head = document.head;
-	let imdb_id_item, imdb_id, douban_en_name, douban_cn_name, douban_gbk_name;
+	let imdb_id_item, imdb_id, douban_en_name, douban_cn_name, douban_gbk_name, douban_id;
 
 	if (url.includes("www.douban.com/personage/")) {
 		imdb_id_item = getImdbIdItem(".subject-property", '//span[contains(text(), "IMDb编号:")]/following::*[1]');
@@ -41,6 +41,8 @@
 	if (url.includes("movie.douban.com/subject/")) {
 		imdb_id_item = getImdbIdItem("#info", '//span[contains(text(), "IMDb:")]/following::text()[1]');
 		imdb_id = imdb_id_item.textContent.trim();
+
+		douban_id = url.match(/subject\/(\d+)/)[1];
 
 		//获取豆瓣中文名
 		douban_cn_name = head.querySelector("title").innerText.slice(9, -6);
@@ -261,6 +263,10 @@
 			name: "字幕搜索",
 			links: [
 				{
+					name: "subhd",
+					search: `https://subhd.me/d/${douban_id}`,
+				},
+				{
 					name: "射手网",
 					search: "https://assrt.net/sub/?searchword=" + douban_cn_name,
 				},
@@ -271,6 +277,10 @@
 				{
 					name: "OpenSub",
 					search: "https://www.opensubtitles.com/zh-CN/zh-CN/search-all/q-" + imdb_id + "/hearing_impaired-include/machine_translated-/trusted_sources-",
+				},
+				{
+					name: "subdl",
+					search: `https://subdl.com/search/${douban_en_name}`,
 				},
 			],
 		},
