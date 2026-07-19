@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         豆瓣助手
-// @version      1.2.2
+// @version      1.2.3
 // @namespace    airbash/DoubanAssistant
 // @homepageURL  https://github.com/AirBashX/UserScript
 // @author       airbash
@@ -224,7 +224,7 @@
 				},
 				{
 					name: "海盗湾",
-					search: "https://thepiratebay10.xyz/search/" + douban_en_name,
+					search: "https://pirateproxylive.org/search/" + douban_en_name,
 				},
 				{
 					name: "Lime",
